@@ -1,4 +1,6 @@
-Breakdown of Work:
+# Team members: Alice, Brendan, Devynn
+
+Breakdown of Work: TBD
 
 Example below:
 March 9th (First Sprint Complete)
