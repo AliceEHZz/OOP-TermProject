@@ -51,7 +51,7 @@ class AuthenticationController implements IController {
 
   // 🔑 These Authentication methods needs to be implemented by you
   private login = passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: `${this.path}/posts`,
     failureRedirect: `${this.path}/login`,
     failureMessage: true,
   });
@@ -64,14 +64,14 @@ class AuthenticationController implements IController {
     req.logout((err) => {
       if (err) console.log(err);
     });
-    res.redirect(`${this.path}/login`);
+    res.redirect("/");
   }
   
   private logout = async (req: Request, res: Response) => {
     req.logout((err) => {
       if (err) console.log(err);
     });
-    res.redirect(`${this.path}/login`);
+    res.redirect("/");
   };
 }
 
