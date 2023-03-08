@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Response, Request, NextFunction } from "express";
 import passport from "passport";
 import IController from "../../../interfaces/controller.interface";
 import { IAuthenticationService } from "../services";
@@ -33,10 +33,11 @@ class AuthenticationController implements IController {
     this.router.post(`${this.path}/register`, this.registration);
     this.router.get(`${this.path}/login`, this.showLoginPage);
     this.router.post(`${this.path}/login`, this.login);
+    this.router.get(`${this.path}/logout`, this.getLogout)
     this.router.post(`${this.path}/logout`, this.logout);
   }
 
-  private showLoginPage = (req: express.Request, res: express.Response) => {
+  private showLoginPage = (req: Request, res: Response) => {
     const errMsg = req.session.messages;
     req.session.messages = [];
     res.render("authentication/views/login", {
@@ -44,7 +45,7 @@ class AuthenticationController implements IController {
     });
   };
 
-  private showRegistrationPage = (req: express.Request, res: express.Response) => {
+  private showRegistrationPage = (req: Request, res: Response) => {
     res.render("authentication/views/register");
   };
 
@@ -55,9 +56,18 @@ class AuthenticationController implements IController {
     failureMessage: true,
   });
 
-  private registration = async (req: express.Request, res: express.Response, next: express.NextFunction) => {};
+  private registration = async (req: Request, res: Response, next: NextFunction) => {
 
-  private logout = async (req: express.Request, res: express.Response) => {
+  };
+
+  private getLogout = async (req: Request, res: Response) => {
+    req.logout((err) => {
+      if (err) console.log(err);
+    });
+    res.redirect(`${this.path}/login`);
+  }
+  
+  private logout = async (req: Request, res: Response) => {
     req.logout((err) => {
       if (err) console.log(err);
     });
