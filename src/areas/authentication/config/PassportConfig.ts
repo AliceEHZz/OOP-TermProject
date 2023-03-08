@@ -9,15 +9,19 @@
  * 3. deserializeUser
  */
 
-import passport, { serializeUser, deserializeUser } from "passport";
+import passport from "passport";
+import { Request } from "express";
 import { Strategy as LocalStrategy } from "passport-local";
 import { IAuthenticationService } from "../services";
+import { database } from "../../../model/fakeDB";
+import IUser from "../../../interfaces/user.interface"
 
 export default class PassportConfig {
   authService: IAuthenticationService;
 
   public constructor(service: IAuthenticationService) {
     this.initializeLocalStrategy();
+    this.initializeLocalRegisterStrategy();
     this.authService = service;
   }
 
@@ -27,6 +31,7 @@ export default class PassportConfig {
         {
           usernameField: "email",
           passwordField: "password",
+          
         },
         async (email: string, password: string, done: any) => {
           try {
@@ -48,5 +53,48 @@ export default class PassportConfig {
         done({ message: "User not found" }, null);
       }
     });
+  }
+
+  private initializeLocalRegisterStrategy(): void {
+    passport.use("local-signup", new LocalStrategy(
+      {
+        usernameField: "email",
+        passwordField: "password",
+        passReqToCallback: true,
+        
+      },
+      async (req: Request, email: string, password: string, done: any) => {
+        const { firstName, lastName } = req.body;
+
+        if (!firstName || !lastName) {
+          return done({ message: "There is no firstName and/or lastName"}, null);
+        }
+
+        let foundUser;
+
+        for (const user of database.users) {
+          if (user.email === email) {
+            foundUser = true;
+            break;
+          }
+        }
+
+        if (foundUser) {
+          done({ message: "A user is already using that email"}, null);
+        } else {
+          const newUser: IUser = {
+            id: String(database.users.length + 1),
+            email,
+            password,
+            firstName,
+            lastName,
+            username: `${firstName.toLowerCase()}${lastName.toLowerCase()}`,
+          };
+
+          database.users.push(newUser);
+          done(null, newUser);
+        }
+      }
+    ));
   }
 }

@@ -51,14 +51,16 @@ class AuthenticationController implements IController {
 
   // 🔑 These Authentication methods needs to be implemented by you
   private login = passport.authenticate("local", {
-    successRedirect: `${this.path}/posts`,
+    successRedirect: "/posts",
     failureRedirect: `${this.path}/login`,
     failureMessage: true,
   });
 
-  private registration = async (req: Request, res: Response, next: NextFunction) => {
-
-  };
+  private registration = passport.authenticate("local-signup", {
+    successRedirect: "/posts",
+    failureRedirect: `${this.path}/register`,
+    failureMessage: true,
+  });
 
   private getLogout = async (req: Request, res: Response) => {
     req.logout((err) => {
