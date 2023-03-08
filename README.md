@@ -3,9 +3,9 @@
 Breakdown of Work: TBD
 
 Example below:
-March 9th (First Sprint Complete)
-Amy Chan:
-I worked on the following tasks:
+Assigned March 3 (First Sprint)
+Alice Lin:
+I work on the following tasks:
 
 1. <Insert Some Task Here> - This task is responsible for xyz functionality.
 2. <Insert Some Task Here> - This task is responsible for xyz functionality.
