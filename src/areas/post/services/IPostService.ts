@@ -14,4 +14,5 @@ export default interface IPostService {
     message: { id: string; createdAt: string; userId: string; message: string },
     postId: string
   ): IPost | void;
+  modifyLikes(post_id: string, user_email: string): void;
 }

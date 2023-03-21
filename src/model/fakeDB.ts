@@ -17,7 +17,7 @@ const database: IDatabase = {
           message: "Microsoft is a nice company",
           createdAt: new Date(),
           likes: 3,
-          comments: 0,
+          comments: 1,
           commentList: [
             {
               id: "abc2",
@@ -104,7 +104,7 @@ const post = {
   comments: "1",
   likes: "2",
   commentList: ["cool post"],
-}
+};
 
 const posts = [
   {
@@ -122,8 +122,9 @@ const posts = [
     createdAt: new Date(),
     message: "this is a new post by me",
     comments: "1",
-    likes: "2",
+    likes: "1",
     commentList: ["cool post"],
+    likesList: ["gates@gmail.com"],
   },
 ];
 

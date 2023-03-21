@@ -8,6 +8,7 @@ interface IPost {
   commentList?: Array<IComment>;
   likes: number;
   comments: number;
+  likesList?: string[];
 }
 
 export default IPost;
