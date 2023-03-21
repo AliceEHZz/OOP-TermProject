@@ -11,7 +11,7 @@ export class PostService implements IPostService {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }
-  findById(id: string): IPost {
+  findById(id: number): IPost {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }
@@ -24,4 +24,5 @@ export class PostService implements IPostService {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }
+  modifyLikes(post_id: number, user_email: string): void {}
 }

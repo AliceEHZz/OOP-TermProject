@@ -12,7 +12,7 @@ const database: IDatabase = {
       username: "billgates",
       posts: [
         {
-          id: "abc1",
+          postId: 1,
           userId: "billgates",
           message: "Microsoft is a nice company",
           createdAt: new Date(),
@@ -20,7 +20,7 @@ const database: IDatabase = {
           comments: 1,
           commentList: [
             {
-              id: "abc2",
+              postId: 1,
               createdAt: "2012-01-09T11:25:13Z",
               userId: "billgates",
               message: "this is some random comment",
@@ -39,7 +39,7 @@ const database: IDatabase = {
       lastName: "Smith",
       posts: [
         {
-          id: "abc3",
+          postId: 2,
           userId: "james123",
           message: "A post by james",
           createdAt: new Date(),
@@ -47,7 +47,7 @@ const database: IDatabase = {
           comments: 12,
           commentList: [
             {
-              id: "abc4",
+              postId: 2,
               createdAt: "2012-01-05T04:13:24Z",
               userId: "billgates",
               message: "Cool post james. Glad I decided to follow you.",
@@ -55,7 +55,7 @@ const database: IDatabase = {
           ],
         },
         {
-          id: "abc5",
+          postId: 3,
           userId: "james123",
           message: "Nice weather today in Vancouver",
           createdAt: new Date(),
@@ -63,7 +63,7 @@ const database: IDatabase = {
           comments: 12,
           commentList: [
             {
-              id: "abc6",
+              postId: 3,
               userId: "billgates",
               createdAt: "2012-02-05T05:13:24Z",
               message: "The weather is always nice when you're rich like me.",
@@ -97,33 +97,55 @@ const userDatabase = [
 ];
 
 const post = {
-  postId: 5,
+  postId: 4,
   userId: "john",
-  createdAt: new Date(),
   message: "Hi there",
-  comments: "1",
-  likes: "2",
-  commentList: ["cool post"],
+  createdAt: new Date(),
+  likes: 2,
+  comments: 1,
+  commentList: [
+    {
+      postId: 4,
+      createdAt: "2012-01-09T11:25:13Z",
+      userId: "billgates",
+      message: "cool post",
+    },
+  ],
 };
 
 const posts = [
   {
-    postId: 5,
-    userId: "john",
-    createdAt: new Date(),
-    message: "Hi there",
-    comments: "1",
-    likes: "2",
-    commentList: ["cool post"],
-  },
-  {
     postId: 4,
     userId: "john",
+    message: "Hi there",
     createdAt: new Date(),
+    likes: 2,
+    comments: 1,
+    commentList: [
+      {
+        postId: 4,
+        createdAt: "2012-01-09T11:25:13Z",
+        userId: "billgates",
+        message: "cool post for post 4",
+      },
+    ],
+    likesList: ["james123@gmail.com", "ad123@gmail.com"],
+  },
+  {
+    postId: 5,
+    userId: "john",
     message: "this is a new post by me",
-    comments: "1",
-    likes: "1",
-    commentList: ["cool post"],
+    createdAt: new Date(),
+    likes: 1,
+    comments: 1,
+    commentList: [
+      {
+        postId: 5,
+        createdAt: "2012-01-09T11:25:13Z",
+        userId: "billgates",
+        message: "cool post for post 5",
+      },
+    ],
     likesList: ["gates@gmail.com"],
   },
 ];

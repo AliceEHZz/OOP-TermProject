@@ -1,9 +1,9 @@
 import IComment from "./comment.interface";
 
 interface IPost {
-  id: string;
-  message: string;
+  postId: number;
   userId: string;
+  message: string;
   createdAt: Date;
   commentList?: Array<IComment>;
   likes: number;

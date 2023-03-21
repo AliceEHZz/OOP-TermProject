@@ -8,11 +8,11 @@ export default interface IPostService {
 
   getAllPosts(username: string): IPost[];
 
-  findById(id: string): IPost | undefined;
+  findById(id: number): IPost | undefined;
 
   addCommentToPost(
     message: { id: string; createdAt: string; userId: string; message: string },
     postId: string
   ): IPost | void;
-  modifyLikes(post_id: string, user_email: string): void;
+  modifyLikes(post_id: number, user_email: string): void;
 }

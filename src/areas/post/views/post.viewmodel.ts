@@ -14,7 +14,7 @@ import IPost from "../../../interfaces/post.interface";
 // date that you store in createdAt.
 
 export class PostViewModel {
-  public postId: string;
+  public postId: number;
   public userId: string;
   public createdAt: Date;
   public message: string;
@@ -23,7 +23,7 @@ export class PostViewModel {
   public commentList?: Array<IComment>;
 
   constructor(post: IPost) {
-    this.postId = post.id;
+    this.postId = post.postId;
     this.userId = post.userId;
     this.createdAt = post.createdAt;
     this.message = post.message;

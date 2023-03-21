@@ -1,14 +1,3 @@
-//----------------------------------------
-// TODO:                                 |
-//----------------------------------------
-// 🚀 Configure Passport.js Local Authentication in this file
-//    Ensure code is fully typed (as we're using ts) wherever possible (unless inference can be made)
-/**
- * 1. Your local strategy
- * 2. serializeUser
- * 3. deserializeUser
- */
-
 import passport from "passport";
 import { Request } from "express";
 import { Strategy as LocalStrategy } from "passport-local";
@@ -22,6 +11,7 @@ export default class PassportConfig {
   public constructor(service: IAuthenticationService) {
     this.initializeLocalStrategy();
     this.initializeLocalRegisterStrategy();
+    this.deserializeUser = this.deserializeUser.bind(this);
     this.authService = service;
   }
 
@@ -42,21 +32,25 @@ export default class PassportConfig {
         }
       )
     );
+  }
+
+  serializeUser() {
     passport.serializeUser(function (user, done: (err: any, email: string) => void) {
       done(null, (user as any).email);
     });
-    passport.deserializeUser(function (
-      email,
-      done: (err: any, user?: false | Express.User | null | undefined) => void
-    ) {
-      const user = this.authService.findUserByEmail(email);
+  }
+
+  deserializeUser = () => {
+    // function inside the function, may lost the function of this. 
+    passport.deserializeUser((email, done: (err: any, user?: false | Express.User | null | undefined) => void) => {
+      const user = this.authService.findUserByEmail(email as any);
       if (user) {
         done(null, user);
       } else {
         done({ message: "User not found" }, null);
       }
     });
-  }
+  };
 
   private initializeLocalRegisterStrategy(): void {
     passport.use(

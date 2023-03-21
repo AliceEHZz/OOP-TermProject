@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction, Router } from "express";
 import IController from "../../../interfaces/controller.interface";
 import IPostService from "../services/IPostService";
+import { ensureAuthenticated } from "../../../middleware/authentication.middleware";
 import { post, posts, userDatabase } from "../../../model/fakeDB";
 import session from "express-session";
 
@@ -26,7 +27,7 @@ class PostController implements IController {
     this.router.get(`${this.path}/:id/delete`, this.deletePost);
     this.router.post(`${this.path}/:id/comment`, this.createComment);
     this.router.post(`${this.path}`, this.createPost);
-    this.router.post(`${this.path}/:id/like`, this.likePost);
+    this.router.get(`${this.path}/:postId/like`, ensureAuthenticated, this.likePost);
   }
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
@@ -46,11 +47,11 @@ class PostController implements IController {
   private likePost = async (req: Request, res: Response, next: NextFunction) => {
     //logic
     const post_id = req.params.postId;
-    const user_email = req.user;
-    res.send(user_email);
-    // const user_email = userDatabase.filter((user) => user.id == user_id)[0].email;
-    // this.postService.modifyLikes(post_id, user_id, user_email);
-    // res.redirect(this.path);
+    const user = await req.user;
+    const user_email = user["email"];
+    console.log(post_id);
+    this.postService.modifyLikes(parseInt(post_id), user_email);
+    res.redirect(this.path);
   };
 }
 

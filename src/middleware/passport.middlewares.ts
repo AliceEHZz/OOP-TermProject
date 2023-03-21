@@ -6,5 +6,7 @@ import { Application } from "express";
 module.exports = (app: Application) => {
   app.use(passport.initialize());
   app.use(passport.session());
-  new PassportConfig(new MockAuthenticationService());
+  const passportConfig = new PassportConfig(new MockAuthenticationService());
+  passportConfig.serializeUser();
+  passportConfig.deserializeUser();
 };

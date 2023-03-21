@@ -206,11 +206,11 @@
                       <%= post.commentList.length %>
                     </a></span>
                   <span class="mr-8">
-                    <form method="POST" action="/posts/<%= post.postId %>/like"
-                      class="text-grey-dark hover:no-underline hover:text-red"><button><i
-                          class="fa fa-heart fa-lg mr-2"></i></button>
+                    <a href="/posts/<%= post.postId %>/like"
+                      class="text-grey-dark hover:no-underline hover:text-blue-light"><i
+                        class="fa fa-heart fa-lg mr-2"></i>
                       <%= post.likes %>
-                        </a>
+                    </a>
                   </span>
                 </div>
               </div>

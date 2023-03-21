@@ -13,9 +13,12 @@ export class MockPostService implements IPostService {
     // 🚀 Implement this yourself.
     throw new Error("Method not implemented.");
   }
-  findById(id: string): IPost {
+  findById(id: number): IPost {
     // 🚀 Implement this yourself.
-    throw new Error("Method not implemented.");
+    let post = posts.filter((post) => post.postId === id);
+    if (post) {
+      return post[0];
+    }
   }
   addCommentToPost(message: { id: string; createdAt: string; userId: string; message: string }, postId: string): void {
     // 🚀 Implement this yourself.
@@ -27,16 +30,18 @@ export class MockPostService implements IPostService {
     throw new Error("Method not implemented.");
   }
 
-  modifyLikes(post_id: string, user_email: string): void {
+  modifyLikes(post_id: number, user_email: string): void {
     let post = this.findById(post_id);
 
     let index = post.likesList.findIndex((email) => email == user_email);
     if (index > -1) {
       // If object with matching email exists, remove it from array
       post.likesList.splice(index, 1);
+      post.likes -= 1;
     } else {
       // If object with matching email doesn't exist, add new object to array
       post.likesList.push(user_email);
+      post.likes += 1;
     }
   }
 }
