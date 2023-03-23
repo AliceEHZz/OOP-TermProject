@@ -10,6 +10,7 @@ const database: IDatabase = {
       firstName: "Bill",
       lastName: "Gates",
       username: "billgates",
+      role: "user",
       posts: [
         {
           postId: 1,
@@ -28,7 +29,7 @@ const database: IDatabase = {
           ],
         },
       ],
-      following: [],
+      following: ["2", "3"],
     },
     {
       id: "2",
@@ -37,6 +38,7 @@ const database: IDatabase = {
       password: "james123",
       firstName: "James",
       lastName: "Smith",
+      role: "user",
       posts: [
         {
           postId: 2,
@@ -71,7 +73,27 @@ const database: IDatabase = {
           ],
         },
       ],
+      following: ["1", "3"],
+    },
+    {
+      id: "3",
+      firstName: "Armaan",
+      lastName: "Armaan",
+      email: "ad123@gmail.com",
+      password: "ad123123!",
+      role: "admin",
+      posts: [],
       following: [],
+    },
+    {
+      id: "4",
+      firstName: "John",
+      lastName: "Armaan",
+      email: "jo123@gmail.com",
+      password: "jo123",
+      role: "user",
+      posts: [],
+      following: ["1"],
     },
   ],
 };
@@ -80,19 +102,39 @@ const database: IDatabase = {
 const userDatabase = [
   {
     id: "1",
+    firstName: "Bill",
+    lastName: "Gates",
+    email: "gates@gmail.com",
+    password: "gates123",
+    role: "user",
+    following: ["2", "3"],
+  },
+  {
+    id: "2",
+    firstName: "James",
+    lastName: "Smith",
+    email: "james123@gmail.com",
+    password: "james123",
+    role: "user",
+    following: ["1", "3"],
+  },
+  {
+    id: "3",
     firstName: "Armaan",
     lastName: "Armaan",
     email: "ad123@gmail.com",
     password: "ad123123!",
     role: "admin",
+    following: [],
   },
   {
-    id: "2",
+    id: "4",
     firstName: "John",
     lastName: "Armaan",
     email: "jo123@gmail.com",
     password: "jo123",
     role: "user",
+    following: ["1"],
   },
 ];
 

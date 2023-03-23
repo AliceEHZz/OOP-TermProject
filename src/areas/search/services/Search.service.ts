@@ -13,5 +13,5 @@ export class SearchService implements ISearchService {
     throw new Error("wait for prisma");
   };
 
-  modifyFollowing(post_id: number, user_email: string): void {}
+  modifyFollowing(searchResultUserId: string, currentUserId: string): void {}
 }

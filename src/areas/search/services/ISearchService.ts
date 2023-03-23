@@ -7,5 +7,5 @@ export default interface ISearchService {
 
   showPostResult(searchInput: string): IPost[];
 
-  modifyFollowing(post_id: number, user_email: string): void;
+  modifyFollowing(searchResultUserId: string, currentUserId: string): void;
 }

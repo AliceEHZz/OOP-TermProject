@@ -23,15 +23,25 @@ class SearchController implements IController {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, ensureAuthenticated, this.searchResult);
+    this.router.get(`${this.path}/follow`, ensureAuthenticated, this.followController);
   }
 
   // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
-  private searchResult = (req: Request, res: Response) => {
+  private searchResult = async (req: Request, res: Response) => {
     let input = req.query.query.toString();
-    let user = req.user;
+    const currentUser = await req.user;
+    const currentUserId = currentUser["id"];
+    const currentUserFollowing = currentUser["following"];
     let userResult = this.searchService.showUserResult(input);
     let postResult = this.searchService.showPostResult(input);
-    res.render("search/views/search", { user, userResult, postResult });
+    res.render("search/views/search", { currentUserFollowing, currentUserId, userResult, postResult });
+  };
+  private followController = async (req: Request, res: Response) => {
+    let searchResultUserId = req.query.userId.toString();
+    const currentUser = await req.user;
+    const currentUserId = currentUser["id"];
+    this.searchService.modifyFollowing(searchResultUserId, currentUserId);
+    res.redirect("back");
   };
 }
 

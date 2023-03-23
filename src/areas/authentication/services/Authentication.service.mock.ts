@@ -1,4 +1,4 @@
-import { database } from "../../../model/fakeDB";
+import { database, userDatabase } from "../../../model/fakeDB";
 import IUser from "../../../interfaces/user.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
 
@@ -24,6 +24,15 @@ export class MockAuthenticationService implements IAuthenticationService {
       }
     } else {
       throw new Error(`Couldn't find user with email: ${email}`);
+    }
+  }
+
+  public async findUserById(id: String): Promise<null | IUser> {
+    let user = this._db.users.find((user) => user.id == id);
+    if (user) {
+      return user;
+    } else {
+      throw new Error(`Couldn't find user with id`);
     }
   }
 

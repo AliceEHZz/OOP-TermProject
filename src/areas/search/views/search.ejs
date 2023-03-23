@@ -27,7 +27,7 @@
         </div>
         <div class="flex flex-wrap mt-12 justify-center">
           <div class="grid grid-cols-1 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 xl:grid-cols-6 gap-4">
-            <% userResult.forEach(user=> { %>
+            <% userResult.forEach(resultedUser=> { %>
               <div class="col-span-2 sm:col-span-1 xl:col-span-1">
                 <img alt="..."
                   src="https://sewausa.org/resources/Sewa%20USA%20Images/Projects/Sewa%20Aspire/Volunteer%20list/9.png"
@@ -35,20 +35,24 @@
               </div>
               <div class="col-span-2 sm:col-span-4 xl:col-span-4">
                 <p>
-                  <%= user.firstName %>
-                    <%= user.lastName %>
+                  <%= resultedUser.firstName %>
+                    <%= resultedUser.lastName %>
                 </p>
               </div>
               <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic">
-                <form action="/search/<%= user.userId %>/follow">
-                  <!-- req.params.id /search/:id/follow -->
-                  <button name="query"
-                    class="text-pink-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                    type="button" style="transition: all 0.15s ease">
-                    <i class="fa fa-heart mr-2"></i> Following
-                  </button>
-                  <!-- fa-heart-o -->
-                </form>
+                <% if (resultedUser.id !=currentUserId) { %>
+                  <form action="/search/follow" method="get">
+                    <button name="userId" value="<%= resultedUser.id %>"
+                      class="text-pink-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                      type="submit" style="transition: all 0.15s ease">
+                      <% if (currentUserFollowing.includes(resultedUser.id)){ %>
+                        <i class="fa fa-heart mr-2"></i> Following
+                        <% } else { %>
+                          <i class="fa fa-heart-o mr-2"></i> Follow
+                          <% } %>
+                    </button>
+                  </form>
+                  <% } %>
               </div>
               <% }) %>
           </div>

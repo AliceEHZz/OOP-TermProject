@@ -49,7 +49,6 @@ class PostController implements IController {
     const post_id = req.params.postId;
     const user = await req.user;
     const user_email = user["email"];
-    console.log(post_id);
     this.postService.modifyLikes(parseInt(post_id), user_email);
     res.redirect(this.path);
   };

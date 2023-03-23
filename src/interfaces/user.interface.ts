@@ -9,4 +9,5 @@ export default interface IUser {
   lastName: string;
   posts?: Array<IPost>;
   following?: Array<string>;
+  role?: string;
 }
