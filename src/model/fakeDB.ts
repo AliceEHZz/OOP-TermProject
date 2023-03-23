@@ -98,7 +98,7 @@ const userDatabase = [
 
 const post = {
   postId: 4,
-  userId: "john",
+  userId: "john Kelly",
   message: "Hi there",
   createdAt: new Date(),
   likes: 2,
@@ -108,15 +108,16 @@ const post = {
       postId: 4,
       createdAt: "2012-01-09T11:25:13Z",
       userId: "billgates",
-      message: "cool post",
+      message: "cool post for post 4",
     },
   ],
+  likesList: ["james123@gmail.com", "ad123@gmail.com"],
 };
 
 const posts = [
   {
     postId: 4,
-    userId: "john",
+    userId: "john Kelly",
     message: "Hi there",
     createdAt: new Date(),
     likes: 2,
@@ -133,7 +134,7 @@ const posts = [
   },
   {
     postId: 5,
-    userId: "john",
+    userId: "john Chan",
     message: "this is a new post by me",
     createdAt: new Date(),
     likes: 1,
