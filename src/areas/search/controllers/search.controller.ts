@@ -25,10 +25,10 @@ class SearchController implements IController {
     this.router.get(`${this.path}`, ensureAuthenticated, this.searchResult);
   }
 
-  // 🚀 This method should use your postService and pull from your actual fakeDB, not the temporary posts object
   private searchResult = (req: Request, res: Response) => {
     let input = req.query.query.toString();
     let user = req.user;
+    console.log(req.user);
     let userResult = this.searchService.showUserResult(input);
     let postResult = this.searchService.showPostResult(input);
     res.render("search/views/search", { user, userResult, postResult });
