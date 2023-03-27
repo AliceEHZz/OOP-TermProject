@@ -21,6 +21,7 @@ export class PostViewModel {
   public comments: string;
   public likes: string;
   public commentList?: Array<IComment>;
+  public likesList?: string[] | null;
 
   constructor(post: IPost) {
     this.postId = post.postId;
@@ -30,5 +31,6 @@ export class PostViewModel {
     this.comments = post.comments?.toString();
     this.likes = post.likes?.toString();
     this.commentList = post.commentList;
+    this.likesList = post.likesList;
   }
 }

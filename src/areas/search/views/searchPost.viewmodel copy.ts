@@ -1,6 +1,7 @@
 import IUser from "../../../interfaces/user.interface";
 import IPost from "../../../interfaces/post.interface";
 import ISearch from "../../../interfaces/search.interface";
+ //! looks like I don't need this = =
 
 export class SearchViewModel {
   public postId: number;
