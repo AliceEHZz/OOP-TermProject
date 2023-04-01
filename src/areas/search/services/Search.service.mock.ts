@@ -4,8 +4,7 @@ import ISearchService from "./ISearchService";
 import { post, posts, userDatabase } from "../../../model/fakeDB";
 import { MockAuthenticationService } from "../../authentication/services/Authentication.service.mock";
 
-export class MockSearchService {
-  //implements ISearchService {
+export class MockSearchService implements ISearchService {
   public showUserResult = (searchInput: string): IUser[] => {
     const userResults = userDatabase.filter((user) => {
       const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();

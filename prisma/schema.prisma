@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id        Int      @id @default(autoincrement()) // primary key
+  createdAt DateTime @default(now())
+  message   String   
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  likes     Likes[]
+  commentlist  Commentlist[] 
+  comments   Int      @default(0)
+}
+
+
+model User {
+  id          Int         @id @default(autoincrement()) // primary key
+  email       String      @unique
+  username    String   
+  firstname   String
+  lastname    String
+  password    String
+  role        String
+  posts       Post[]
+  follower    User[]      @relation("follow")
+  followee    User[]      @relation("follow")
+  likes       Likes[]
+  commentlist Commentlist[]  
+}
+
+model Likes {
+  id          Int      @id @default(autoincrement()) // primary key
+  post        Post     @relation(fields: [postId], references: [id])
+  postId      Int
+  User        User     @relation(fields: [userId], references: [id])  
+  userId      Int   
+    
+  @@unique([postId, userId])
+}
+
+model Commentlist {
+  id          Int      @id @default(autoincrement()) // primary key
+  message     String    @default("")
+  post        Post     @relation(fields: [postId], references: [id])
+  postId      Int
+  commenter   User      @relation(fields: [commenterId],references: [id])  
+  commenterId Int    
+}
+
+// model Following {
+//   id            Int      @id @default(autoincrement()) // primary key
+//   user          User     @relation("follower", fields: [userId], references: [id])      
+//   userId        Int  
+//   followingUser User     @relation("followee", fields: [followingId], references: [id])      
+//   followingId   Int      
+  
+  // @@unique([userId, followingId])
+// }

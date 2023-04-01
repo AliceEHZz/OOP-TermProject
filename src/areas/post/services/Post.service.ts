@@ -1,5 +1,8 @@
 import IPost from "../../../interfaces/post.interface";
 import IPostService from "./IPostService";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 // ❗️ Implement this class much later, once everything works fine with your mock db
 export class PostService implements IPostService {
