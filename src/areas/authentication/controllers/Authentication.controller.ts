@@ -46,7 +46,11 @@ class AuthenticationController implements IController {
   };
 
   private showRegistrationPage = (req: Request, res: Response) => {
-    res.render("authentication/views/register");
+    const errMsg = req.session.messages;
+    req.session.messages = []
+    res.render("authentication/views/register", {
+      messages: errMsg,
+    });
   };
 
   // 🔑 These Authentication methods needs to be implemented by you
