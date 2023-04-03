@@ -1,5 +1,6 @@
 import { database, userDatabase } from "../../../model/fakeDB";
 import IUser from "../../../interfaces/user.interface";
+import IUserData from "../../../interfaces/userData.interface";
 import { IAuthenticationService } from "./IAuthentication.service";
 
 export class MockAuthenticationService implements IAuthenticationService {
@@ -36,7 +37,29 @@ export class MockAuthenticationService implements IAuthenticationService {
     }
   }
 
-  public async createUser(user: any): Promise<IUser> {
-    throw new Error("Method not implemented");
+  public async createUser(userData: IUserData): Promise<IUser> {
+    const { firstName, lastName, email, password, username } = userData;
+
+      if (!firstName || !lastName) {
+        throw new Error("There is no firstName and/or lastName");
+      }
+
+      const foundUser = this._db.users.find((user) => user.email == email)
+      if (foundUser) {
+        throw new Error(`A user is already using email: ${email}`);
+      }
+
+      const newUser: IUser = {
+        id: String(database.users.length + 1),
+        email,
+        password,
+        firstName,
+        lastName,
+        username: username || `${firstName.toLowerCase()}${lastName.toLowerCase()}`,
+      };
+
+      database.users.push(newUser);
+      return new Promise((resolve) => resolve(newUser));
+      
   }
 }
