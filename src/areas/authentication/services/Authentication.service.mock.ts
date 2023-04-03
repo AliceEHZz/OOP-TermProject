@@ -59,7 +59,6 @@ export class MockAuthenticationService implements IAuthenticationService {
       };
 
       database.users.push(newUser);
-      return new Promise((resolve) => resolve(newUser));
-      
+      return newUser;
   }
 }
