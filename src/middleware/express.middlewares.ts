@@ -2,6 +2,37 @@ import express from "express";
 import path from "path";
 import session from "express-session";
 import morgan from "morgan";
+import RedisStore from "connect-redis";
+import { createClient } from "redis";
+import * as dotenv from "dotenv";
+dotenv.config();
+import process from "node:process";
+
+const MemoryStore = require("memorystore")(session);
+
+// Initialize client.
+let redisClient = createClient({
+  password: process.env.REDIS_PASSWORD || "",
+  socket: {
+    host: process.env.REDIS_HOST || "",
+    port: Number(process.env.REDIS_PORT),
+  },
+});
+
+redisClient.connect().catch(console.error); //https://github.com/tj/connect-redis
+
+redisClient.on("error", (err) => console.log("Redis Client Error", err));
+
+// redisClient.connect(); //https://github.com/redis/node-redis
+
+// Initialize store types
+let redisStore = new RedisStore({
+  client: redisClient,
+});
+
+let memoryStore = new MemoryStore({
+  checkPeriod: 86400000, // prune expired entries every 24h
+});
 
 module.exports = (app) => {
   // Static File Serving and Post Body Parsing
@@ -24,6 +55,7 @@ module.exports = (app) => {
         secure: false,
         maxAge: 24 * 60 * 60 * 1000,
       },
+      store: redisStore, // or memory store
     })
   );
 };
