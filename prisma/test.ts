@@ -9,7 +9,8 @@ const port = 3000;
 
 app.get("/", async (req, res) => {
   const prismaDB = PrismaDBClient.getInstance();
-  const users = await prismaDB.user.findMany();
+  const users = await prismaDB.user.findUnique({ where: { email: "gates@gmail.com" } });
+  console.log(users);
   res.json(users);
 });
 
