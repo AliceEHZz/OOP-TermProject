@@ -42,14 +42,14 @@
               </div>
               <div class="col-span-2 sm:col-span-4 xl:col-span-4">
                 <p>
-                  <%= resultedUser.firstName %>
-                    <%= resultedUser.lastName %>
+                  <%= resultedUser.firstname %>
+                    <%= resultedUser.lastname %>
                 </p>
               </div>
               <div class="col-span-2 sm:col-span-1 xl:col-span-1 italic">
                 <% if (resultedUser.id !=currentUserId) { %>
                   <form action="/search/follow" method="get">
-                    <button name="userId" value="<%= resultedUser.id %>"
+                    <button name="id" value="<%= resultedUser.id %>"
                       class="text-pink-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                       type="submit" style="transition: all 0.15s ease">
                       <% if (currentUserFollowing.includes(resultedUser.id)){ %>

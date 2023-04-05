@@ -7,7 +7,7 @@ import { MockAuthenticationService } from "../../authentication/services/Authent
 export class MockSearchService implements ISearchService {
   public showUserResult = (searchInput: string): IUser[] => {
     const userResults = userDatabase.filter((user) => {
-      const fullName = `${user.firstName} ${user.lastName}`.toLowerCase();
+      const fullName = `${user.firstname} ${user.lastname}`.toLowerCase();
       return fullName.includes(searchInput.toLowerCase());
     });
     return userResults;
@@ -21,7 +21,7 @@ export class MockSearchService implements ISearchService {
     return postResults;
   };
 
-  public modifyFollowing = async (searchResultUserId: string, currentUserId: string): Promise<void> => {
+  public modifyFollowing = async (searchResultUserId: number, currentUserId: number): Promise<void> => {
     const authService = new MockAuthenticationService();
     let currentUser = await authService.findUserById(currentUserId);
     let index = currentUser["following"].findIndex((followingId) => followingId == searchResultUserId);

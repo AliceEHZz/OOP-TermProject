@@ -41,7 +41,7 @@ export default class PassportConfig {
   }
 
   deserializeUser = () => {
-    // function inside the function, may lost the function of this. 
+    // inner function may lost the functionality of "this". 
     passport.deserializeUser((email, done: (err: any, user?: false | Express.User | null | undefined) => void) => {
       const user = this.authService.findUserByEmail(email as any);
       if (user) {
@@ -62,9 +62,9 @@ export default class PassportConfig {
           passReqToCallback: true,
         },
         async (req: Request, email: string, password: string, done: any) => {
-          const { firstName, lastName } = req.body;
+          const { firstname, lastname } = req.body;
 
-          if (!firstName || !lastName) {
+          if (!firstname || !lastname) {
             return done({ message: "There is no firstName and/or lastName" }, null);
           }
 
@@ -81,12 +81,12 @@ export default class PassportConfig {
             done({ message: "A user is already using that email" }, null);
           } else {
             const newUser: IUser = {
-              id: String(database.users.length + 1),
+              id: Number(database.users.length + 1),
               email,
               password,
-              firstName,
-              lastName,
-              username: `${firstName.toLowerCase()}${lastName.toLowerCase()}`,
+              firstname,
+              lastname,
+              username: `${firstname.toLowerCase()}${lastname.toLowerCase()}`,
             };
 
             database.users.push(newUser);

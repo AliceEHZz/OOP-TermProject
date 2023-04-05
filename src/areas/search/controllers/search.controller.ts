@@ -37,10 +37,11 @@ class SearchController implements IController {
     res.render("search/views/search", { currentUserFollowing, currentUserId, userResult, postResult });
   };
   private followController = async (req: Request, res: Response) => {
-    let searchResultUserId = req.query.userId.toString();
+    let searchResultUserId = await req.query.id.toString();
     const currentUser = await req.user;
+    console.log();
     const currentUserId = currentUser["id"];
-    this.searchService.modifyFollowing(searchResultUserId, currentUserId);
+    this.searchService.modifyFollowing(parseInt(searchResultUserId), currentUserId);
     res.redirect("back");
   };
 }
