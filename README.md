@@ -1,8 +1,7 @@
 # Team members: Alice, Brendan, Devynn
 
-Breakdown of Work: TBD
+Breakdown of Work
 
-Example below:
 **Assigned March 7 (First Sprint)**
 
 Alice Lin:
