@@ -17,7 +17,9 @@ I work on the following tasks:
 Brendan:
 I worked on the following tasks:
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
+1. getAllPosts/ findById - This task is responsible for making the posts from the mockdb show up
+
+   -Post.service.mock.ts 
 
 Devynn:
 I worked on the following tasks:
@@ -48,7 +50,9 @@ I work on the following tasks:
 Brendan:
 I worked on the following tasks:
 
-1. <Insert Some Task Here> - This task is responsible for xyz functionality.
+1. Finished the post service - This task is responsible for allowing the post controller full fuctionality when it is completed.
+   
+      -Post.service.mock.ts 
 
 Devynn:
 I worked on the following tasks:
@@ -67,3 +71,10 @@ I work on the following tasks:
    - fix type errors in all files that doesn't match the prisma database
 
 3. merging branches and solve conflicts on main branch. 
+   
+Brendan:
+I worked on the following tasks:
+
+1. Fished the post controller - This task is responsible for giving full post functionality.
+   
+      -post.controller.ts 
